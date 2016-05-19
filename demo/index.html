@@ -1,0 +1,40 @@
+<head>
+  <script type="text/javascript" src="videocontext.js"></script>
+  <script type="text/javascript" src="clappr/clappr.js"></script>
+  <script type="text/javascript" src="../dist/clappr-videocontext-playback.js"></script>
+</head>
+<body>
+  <div id="player"></div>
+  <script>
+
+  var canvas = $("<canvas />")[0];
+
+  var videoCtx = new VideoContext(canvas);
+
+  var videoNode1 = videoCtx.createVideoSourceNode("./video.mp4");
+  videoNode1.start(0);
+  videoNode1.stop(3);
+
+  var videoNode2 = videoCtx.createVideoSourceNode("./video.mp4");
+  videoNode2.start(2);
+  videoNode2.stop(6);
+
+  var crossFade = videoCtx.createTransitionNode(VideoContext.DEFINITIONS.CROSSFADE);
+  crossFade.transition(2,2.5,0.0,1.0, "mix");
+
+  videoNode2.connect(crossFade);
+  videoNode1.connect(crossFade);
+  crossFade.connect(videoCtx.destination);
+
+  //Clappr.Log.setLevel(Clappr.Log.LEVEL_DEBUG);
+
+  var player = new Clappr.Player({
+    source: videoCtx,
+    parentId: "#player",
+    plugins: [ClapprVideoContextPlayback],
+    height: 360,
+    width: 640
+  });
+
+  </script>
+</body>

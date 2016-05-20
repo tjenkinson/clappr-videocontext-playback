@@ -18,9 +18,14 @@ export default class VideoContextPlayback extends Playback {
     })
     this.$el.append(this._context.canvas)
     $(this._context._canvas).css({width: "100%", height: "100%"})
+  
+    this._context.registerCallback("update", this._update.bind(this))
+    this._context.registerCallback("ended", this._onEnded.bind(this))
+
+    // to handle case where duration may change but content is paused    
     this._updateTimer = setInterval(() => {
       this._update()
-    }, 100);
+    }, 1000);
     
 
     this.settings = {
@@ -76,6 +81,10 @@ export default class VideoContextPlayback extends Playback {
     this.trigger(Events.PLAYBACK_STOP)
   }
 
+  get ended() {
+    return this._context.state === VideoContext.STATE.ENDED
+  }
+
   getPlaybackType() {
     // TODO is this live or vod?
     return Playback.VOD
@@ -83,6 +92,13 @@ export default class VideoContextPlayback extends Playback {
 
   destroy() {
     clearInterval(this._updateTimer)
+    this._context.unregisterCallback(this._update)
+    this._context.unregisterCallback(this._onEnded)
+  }
+
+  _onEnded() {
+    this.trigger(Events.PLAYBACK_ENDED)
+    this.stop()
   }
 
   _update() {

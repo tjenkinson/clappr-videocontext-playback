@@ -16,8 +16,7 @@ export default class VideoContextPlayback extends Playback {
       left: 0,
       right: 0
     })
-    // TODO add public method to videocontext
-    this.$el.append(this._context._canvas)
+    this.$el.append(this._context.canvas)
     $(this._context._canvas).css({width: "100%", height: "100%"})
     this._updateTimer = setInterval(() => {
       this._update()
@@ -60,7 +59,7 @@ export default class VideoContextPlayback extends Playback {
 
   isPlaying() {
     // TODO add public method to videocontext
-    return this._context._state === 0
+    return this._context.state === VideoContext.STATE.PLAYING
   }
 
   get isReady() {

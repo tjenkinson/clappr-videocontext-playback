@@ -1,6 +1,6 @@
 {
   "name": "clappr-videocontext-playback",
-  "version": "0.1.0-0",
+  "version": "0.1.0",
   "description": "A clappr playback for the BBC's video context tool.",
   "main": "src/index.js",
   "scripts": {

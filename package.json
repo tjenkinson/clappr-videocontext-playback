@@ -26,7 +26,7 @@
   "homepage": "https://github.com/tjenkinson/clappr-videocontext-playback#readme",
   "devDependencies": {
     "babel-core": "^6.9.0",
-    "babel-loader": "^6.2.4",
+    "babel-loader": "^6.3.1",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.9.0",
     "clean-webpack-plugin": "^0.1.9",

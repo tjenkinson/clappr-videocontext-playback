@@ -30,6 +30,6 @@
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.9.0",
     "clean-webpack-plugin": "^0.1.9",
-    "webpack": "^1.13.0"
+    "webpack": "^3.0.0-rc.1"
   }
 }
